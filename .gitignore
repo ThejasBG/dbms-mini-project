@@ -1,0 +1,20 @@
+# Environment variables and secrets
+.env
+
+# Python virtual environment
+.venv/
+
+# Python generated files
+__pycache__/
+*.py[cod]
+
+# Next.js dependencies and build output
+node_modules/
+.next/
+out/
+
+# Local environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
