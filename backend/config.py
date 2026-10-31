@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://postgres:Zoro@localhost:5432/game_catalog",
+    "postgresql://postgres:YOUR_POSTGRES_PASSWORD@localhost:5432/game_catalog",
 )
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 TCP_HOST = os.getenv("TCP_HOST", "127.0.0.1")
