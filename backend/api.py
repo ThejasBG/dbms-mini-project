@@ -1,6 +1,7 @@
 import logging
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from backend.service import list_games
 
@@ -13,6 +14,15 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# Allow the local Next.js development server to call this API.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/health")
 def health_check():
@@ -22,8 +32,14 @@ def health_check():
 @app.get("/api/games")
 def get_games():
     try:
-        games = list_games()
-        return {"items": games, "count": len(games)}
+        result = list_games()
+        games = result.get("games", [])
+
+        return {
+            "items": games,
+            "count": len(games),
+            "cached": result.get("cached", False),
+        }
     except Exception as exc:
         logger.exception("Failed to retrieve games")
         raise HTTPException(
