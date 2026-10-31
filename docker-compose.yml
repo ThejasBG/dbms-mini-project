@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: game_catalog
+      POSTGRES_USER: gameapp
+      POSTGRES_PASSWORD: gameapp_dev_password
+    ports: ["5433:5432"]
+    volumes: [game_data:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gameapp -d game_catalog"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: [redis_data:/data]
+volumes:
+  game_data:
+  redis_data:
