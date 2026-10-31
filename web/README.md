@@ -108,4 +108,4 @@ python -m backend.test_http_api
 python -m backend.test_db
 ```
 
-The database integration test requires an initialised PostgreSQL/pgvector database. Also complete the application smoke-test checklist in `APPLY_TO_REPO.md` and capture evidence from the actual running app.
+The database integration test requires an initialised PostgreSQL/pgvector database. Run the application smoke tests against the actual running app and record the results in `../docs/TESTING_RESULTS.md`. Capture screenshots from the working application for the project submission.

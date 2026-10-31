@@ -133,7 +133,7 @@ python -m backend.test_db
 python -m backend.test_http_api
 ```
 
-Before submission, also run `npm run typecheck` and `npm run build` from `web/`, and complete the application smoke-test checklist in `APPLY_TO_REPO.md`.
+Before submission, also run `npm run typecheck` and `npm run build` from `web/`, and record the actual application smoke-test results in `docs/TESTING_RESULTS.md`.
 
 ## Streamlit fallback
 
