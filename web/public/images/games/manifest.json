@@ -1,0 +1,296 @@
+{
+  "Counter-Strike 2": {
+    "appId": 730,
+    "local": "/images/games/counter-strike-2.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Dota 2": {
+    "appId": 570,
+    "local": "/images/games/dota-2.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "PUBG: Battlegrounds": {
+    "appId": 578080,
+    "local": "/images/games/pubg-battlegrounds.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/578080/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Apex Legends": {
+    "appId": 1172470,
+    "local": "/images/games/apex-legends.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Red Dead Redemption 2": {
+    "appId": 1174180,
+    "local": "/images/games/red-dead-redemption-2.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Elden Ring": {
+    "appId": 1245620,
+    "local": "/images/games/elden-ring.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Baldur's Gate 3": {
+    "appId": 1086940,
+    "local": "/images/games/baldur-s-gate-3.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Cyberpunk 2077": {
+    "appId": 1091500,
+    "local": "/images/games/cyberpunk-2077.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Stardew Valley": {
+    "appId": 413150,
+    "local": "/images/games/stardew-valley.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Terraria": {
+    "appId": 105600,
+    "local": "/images/games/terraria.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/105600/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Hades": {
+    "appId": 1145360,
+    "local": "/images/games/hades.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Hollow Knight": {
+    "appId": 367520,
+    "local": "/images/games/hollow-knight.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Celeste": {
+    "appId": 504230,
+    "local": "/images/games/celeste.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/504230/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Among Us": {
+    "appId": 945360,
+    "local": "/images/games/among-us.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Warframe": {
+    "appId": 230410,
+    "local": "/images/games/warframe.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/230410/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "The Sims 4": {
+    "appId": 1222670,
+    "local": "/images/games/the-sims-4.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222670/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Cities: Skylines": {
+    "appId": 255710,
+    "local": "/images/games/cities-skylines.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Age of Empires II: Definitive Edition": {
+    "appId": 813780,
+    "local": "/images/games/age-of-empires-ii-definitive-edition.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/813780/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Path of Exile": {
+    "appId": 238960,
+    "local": "/images/games/path-of-exile.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/238960/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Dead by Daylight": {
+    "appId": 381210,
+    "local": "/images/games/dead-by-daylight.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/381210/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Phasmophobia": {
+    "appId": 739630,
+    "local": "/images/games/phasmophobia.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/739630/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Subnautica": {
+    "appId": 264710,
+    "local": "/images/games/subnautica.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/264710/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "No Man's Sky": {
+    "appId": 275850,
+    "local": "/images/games/no-man-s-sky.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/275850/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Forza Horizon 5": {
+    "appId": 1551360,
+    "local": "/images/games/forza-horizon-5.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Need for Speed Heat": {
+    "appId": 1222680,
+    "local": "/images/games/need-for-speed-heat.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222680/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Euro Truck Simulator 2": {
+    "appId": 227300,
+    "local": "/images/games/euro-truck-simulator-2.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/227300/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Factorio": {
+    "appId": 427520,
+    "local": "/images/games/factorio.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/427520/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Satisfactory": {
+    "appId": 526870,
+    "local": "/images/games/satisfactory.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Portal 2": {
+    "appId": 620,
+    "local": "/images/games/portal-2.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "God of War": {
+    "appId": 1593500,
+    "local": "/images/games/god-of-war.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1593500/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Marvel's Spider-Man Remastered": {
+    "appId": 1817070,
+    "local": "/images/games/marvel-s-spider-man-remastered.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1817070/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Persona 5 Royal": {
+    "appId": 1687950,
+    "local": "/images/games/persona-5-royal.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1687950/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Undertale": {
+    "appId": 391540,
+    "local": "/images/games/undertale.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/391540/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Slay the Spire": {
+    "appId": 646570,
+    "local": "/images/games/slay-the-spire.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/646570/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Balatro": {
+    "appId": 2379780,
+    "local": "/images/games/balatro.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2379780/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Dave the Diver": {
+    "appId": 1868140,
+    "local": "/images/games/dave-the-diver.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1868140/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Helldivers 2": {
+    "appId": 553850,
+    "local": "/images/games/helldivers-2.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/553850/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Black Myth: Wukong": {
+    "appId": 2358720,
+    "local": "/images/games/black-myth-wukong.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Hogwarts Legacy": {
+    "appId": 990080,
+    "local": "/images/games/hogwarts-legacy.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "The Finals": {
+    "appId": 2073850,
+    "local": "/images/games/the-finals.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2073850/header.jpg",
+    "source": "Steam Store artwork"
+  },
+  "Grand Theft Auto V": {
+    "appId": 3240220,
+    "local": "/images/games/grand-theft-auto-v.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3240220/header.jpg",
+    "source": "Steam Store artwork",
+    "storeName": "Grand Theft Auto V Enhanced"
+  },
+  "Rocket League": {
+    "appId": 252950,
+    "local": "/images/games/rocket-league.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/header.jpg",
+    "source": "Steam Store artwork",
+    "storeName": "Rocket League®"
+  },
+  "Overwatch 2": {
+    "external": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Flickr_-_The_U.S._Army_-_Overwatch_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "source": "Wikimedia Commons landscape image",
+    "sourcePage": "File:Flickr - The U.S. Army - Overwatch (2).jpg",
+    "local": "/images/games/overwatch-2.jpg"
+  },
+  "Rainbow Six Siege": {
+    "appId": 359550,
+    "local": "/images/games/rainbow-six-siege.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/header.jpg",
+    "source": "Steam Store artwork",
+    "storeName": "Tom Clancy's Rainbow Six Siege"
+  },
+  "Final Fantasy XIV": {
+    "appId": 39210,
+    "local": "/images/games/final-fantasy-xiv.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/39210/header.jpg",
+    "source": "Steam Store artwork",
+    "storeName": "FINAL FANTASY XIV Online"
+  },
+  "Civilization VI": {
+    "appId": 289070,
+    "local": "/images/games/civilization-vi.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/289070/header.jpg",
+    "source": "Steam Store artwork",
+    "storeName": "Sid Meier’s Civilization® VI"
+  },
+  "League of Legends": {
+    "local": "/images/games/league-of-legends.jpg",
+    "external": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/League_of_Legends_2019_vector.svg/960px-League_of_Legends_2019_vector.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "source": "Wikipedia page image",
+    "sourcePage": "League of Legends"
+  },
+  "Fall Guys": {
+    "appId": 1097150,
+    "local": "/images/games/fall-guys.jpg",
+    "external": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1097150/header.jpg",
+    "source": "Steam Store artwork",
+    "storeName": "Fall Guys"
+  }
+}
