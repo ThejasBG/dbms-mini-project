@@ -74,6 +74,50 @@ def list_library(username="DemoPlayer"):
         return {"games":[clean_game(r) for r in rows]}
     finally: c.close()
 
+
+def add_wishlist(username, gid):
+    username = (username or "").strip()[:40]
+    if not username:
+        return {"error": "Username required."}
+    with transaction() as c:
+        u = c.execute(
+            "INSERT INTO users(username) VALUES (%s) ON CONFLICT(username) DO UPDATE SET username=EXCLUDED.username RETURNING id",
+            (username,),
+        ).fetchone()
+        if not c.execute("SELECT id FROM games WHERE id=%s", (int(gid),)).fetchone():
+            return {"error": "Game not found."}
+        c.execute(
+            "INSERT INTO wishlist(user_id,game_id) VALUES (%s,%s) ON CONFLICT(user_id,game_id) DO NOTHING",
+            (u["id"], int(gid)),
+        )
+    return {"ok": True, "message": "Added to wishlist."}
+
+
+def remove_wishlist(username, gid):
+    username = (username or "").strip()[:40]
+    if not username:
+        return {"error": "Username required."}
+    with transaction() as c:
+        row = c.execute("SELECT id FROM users WHERE username=%s", (username,)).fetchone()
+        if not row:
+            return {"ok": True, "message": "Wishlist item removed."}
+        c.execute("DELETE FROM wishlist WHERE user_id=%s AND game_id=%s", (row["id"], int(gid)))
+    return {"ok": True, "message": "Wishlist item removed."}
+
+
+def list_wishlist(username="DemoPlayer"):
+    username = (username or "DemoPlayer").strip()[:40]
+    c = connect()
+    try:
+        rows = c.execute("""SELECT g.id,g.title,g.description,g.genres,g.platforms,g.pricing_model,g.created_at
+                            FROM users u JOIN wishlist w ON w.user_id=u.id
+                            JOIN games g ON g.id=w.game_id
+                            WHERE u.username=%s ORDER BY w.added_at DESC, g.title""", (username,)).fetchall()
+        return {"games": [clean_game(r) for r in rows]}
+    finally:
+        c.close()
+
+
 def wallets():
     c=connect()
     try: return {"wallets":[dict(r) for r in c.execute("SELECT u.username,w.credits FROM users u JOIN demo_wallets w ON w.user_id=u.id WHERE u.username IN ('DemoPlayer','DemoFriend') ORDER BY u.username").fetchall()]}
@@ -103,6 +147,9 @@ def handle(r):
         if a=="add_review": return add_review(r.get("game_id"),r.get("username"),r.get("rating"),r.get("body"))
         if a=="add_to_library": return add_library(r.get("username"),r.get("game_id"))
         if a=="list_library": return list_library(r.get("username", "DemoPlayer"))
+        if a=="add_to_wishlist": return add_wishlist(r.get("username", "DemoPlayer"), r.get("game_id"))
+        if a=="remove_from_wishlist": return remove_wishlist(r.get("username", "DemoPlayer"), r.get("game_id"))
+        if a=="list_wishlist": return list_wishlist(r.get("username", "DemoPlayer"))
         if a=="get_wallets": return wallets()
         if a=="transfer_demo_credits": return transfer(r.get("from_username"),r.get("to_username"),r.get("amount"))
         return {"error":"Unknown action"}

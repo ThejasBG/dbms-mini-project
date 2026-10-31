@@ -72,7 +72,7 @@ with st.sidebar:
         st.session_state.selected_game_id = None
         st.rerun()
 
-browse, details_tab, recs, library, acid = st.tabs(["🔎 Discover", "📖 Game details", "✨ Recommendations", "📚 My library", "⚙️ Transaction demo"])
+browse, details_tab, recs, library, wishlist_tab, acid = st.tabs(["🔎 Discover", "📖 Game details", "✨ Recommendations", "📚 My library", "💜 Wishlist", "⚙️ Transaction demo"])
 
 with browse:
     filters = st.container()
@@ -122,6 +122,9 @@ with details_tab:
                 if st.button("＋ Add to my library", key=f"add_detail_{gid}", use_container_width=True):
                     x = call({"action": "add_to_library", "username": "DemoPlayer", "game_id": gid})
                     if x and x.get("ok"): st.success(x.get("message", "Added."))
+                if st.button("💜 Add to wishlist", key=f"wish_detail_{gid}", use_container_width=True):
+                    x = call({"action": "add_to_wishlist", "username": "DemoPlayer", "game_id": gid})
+                    if x and x.get("ok"): st.success(x.get("message", "Added to wishlist."))
             st.markdown("---")
             st.subheader("Community reviews")
             reviews = d.get("reviews") or []
@@ -197,6 +200,33 @@ with library:
             cols = st.columns(3)
             for i, game in enumerate(saved):
                 with cols[i % 3]: game_card(game, "library")
+
+
+with wishlist_tab:
+    st.subheader("Your wishlist")
+    st.caption("Wishlist entries are stored in PostgreSQL and protected by a composite primary key and foreign keys.")
+    wl = call({"action": "list_wishlist", "username": "DemoPlayer"})
+    if wl is not None:
+        saved_wishlist = wl.get("games", [])
+        if not saved_wishlist:
+            st.info("Your wishlist is empty. Open a game's details and choose Add to wishlist.")
+        else:
+            cols = st.columns(3, gap="medium")
+            for i, game in enumerate(saved_wishlist):
+                with cols[i % 3]:
+                    with st.container(border=True):
+                        st.markdown(f"### {game['title']}")
+                        st.caption(" · ".join(game.get("genres") or []))
+                        st.write(game.get("description", ""))
+                        if st.button("Remove from wishlist", key=f"remove_wish_{game['id']}"):
+                            result = call({"action": "remove_from_wishlist", "username": "DemoPlayer", "game_id": game["id"]})
+                            if result and result.get("ok"):
+                                st.success(result.get("message", "Removed."))
+                                st.rerun()
+                        if st.button("View details", key=f"wish_detail_open_{game['id']}"):
+                            st.session_state.selected_game_id = int(game["id"])
+                            st.toast("Selected. Open Game details.")
+                            st.rerun()
 
 with acid:
     st.subheader("Atomic transaction demo")
