@@ -1,8 +1,8 @@
 # Application Testing Results
 
-Tested against the existing local `game_catalog` database on 2026-10-31. The
-database was not recreated. `backend.test_db` uses temporary transactional test
-records and verifies rollback.
+Tested on 2026-10-31. The existing local `game_catalog` database was not
+recreated or used for the fresh-initialization test. `backend.test_db` uses
+temporary transactional test records and verifies rollback.
 
 ## Automated checks
 
@@ -25,16 +25,24 @@ records and verifies rollback.
 - Analytics loaded database-derived catalogue, genre, and platform summaries.
 - A natural-language recommendations query returned ranked results from
   pgvector, including similarity scores.
+- A disposable account completed registration, login/logout, player-role
+  denial at `/admin`, wishlist/library add-view-remove, and review submission
+  and update. The account, review, and collection entries were removed; a
+  follow-up database check found no test account or review.
+- The README database setup was tested in a separate disposable PostgreSQL
+  database: pgvector was enabled, the schema seeded 53 games with 384D
+  embeddings, the migration applied, `backend.test_db` passed, and a temporary
+  API instance returned `database: connected`. The disposable database was
+  dropped afterward; `game_catalog` remained intact with 53 games.
 
 ## Not verified in this pass
 
-- Fresh database initialization was deliberately not run against the existing
-  database.
-- Registration, login/logout, role-restricted admin actions, review submission,
-  and wishlist/library mutations were not exercised because no disposable test
-  account was authorized. Avoid using real accounts or leaving test records.
-- The complete README startup procedure and instructor confirmation of the
-  Next.js requirement still need human confirmation.
+- Admin catalogue create/update/delete operations were not manually exercised
+  as an administrator.
+- Python/Node dependencies were already installed, so a clean dependency
+  installation and a fresh frontend-server restart were not repeated.
+- Instructor confirmation of the Next.js requirement and the project's
+  uniqueness within the section still need human confirmation.
 
 ## Screenshots
 
