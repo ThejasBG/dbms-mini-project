@@ -18,12 +18,21 @@ The Next.js application adds paginated discovery, multi-field filtering, account
 
 ## Setup the database
 
-1. Install PostgreSQL and pgvector. Create `game_catalog` if it does not already exist and enable the extension:
+1. Install PostgreSQL and pgvector. From PowerShell, open `psql` connected to the default maintenance database:
 
-   ```sql
+   ```powershell
+   psql -U postgres -h localhost -p 5432 -d postgres
+   ```
+
+   At the `postgres=#` prompt, list databases and create `game_catalog` only if it is not already present. Then connect to it, enable pgvector, and exit `psql`:
+
+   ```psql
+   \l
+   -- Run CREATE DATABASE only if game_catalog is not listed above.
    CREATE DATABASE game_catalog;
-   -- Connect to game_catalog before running:
+   \connect game_catalog
    CREATE EXTENSION IF NOT EXISTS vector;
+   \q
    ```
 
 2. Copy `.env.example` to `.env`, and set `DATABASE_URL` to your actual PostgreSQL connection string. Do not commit `.env`.
