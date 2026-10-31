@@ -25,16 +25,25 @@ records and verifies rollback.
 - Analytics loaded database-derived catalogue, genre, and platform summaries.
 - A natural-language recommendations query returned ranked results from
   pgvector, including similarity scores.
+- Through the UI, registration created a `player` account and signed it in;
+  signing out cleared the session, and a subsequent login succeeded.
+- The player account was denied access to `/admin`.
+- Wishlist and library entries were added, displayed, and removed through the
+  UI. A review was submitted and updated; the genuine-review count stayed at
+  one, confirming the one-review-per-account/game behavior.
+- The disposable account, its review, and its collection data were removed.
+  A database check confirmed no test account or test review remained.
+- The README's running-app endpoints were smoke-checked: the API reported a
+  connected database and the Next.js UI loaded on the documented local ports.
 
 ## Not verified in this pass
 
 - Fresh database initialization was deliberately not run against the existing
-  database.
-- Registration, login/logout, role-restricted admin actions, review submission,
-  and wishlist/library mutations were not exercised because no disposable test
-  account was authorized. Avoid using real accounts or leaving test records.
-- The complete README startup procedure and instructor confirmation of the
-  Next.js requirement still need human confirmation.
+  database. The README commands that initialize/seed the database were skipped
+  to avoid changing existing data.
+- The API and frontend were already running, so their processes were not
+  stopped/restarted solely to rehearse the README launch commands.
+- The Next.js requirement still needs instructor confirmation.
 
 ## Screenshots
 
