@@ -1,6 +1,6 @@
 import logging
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.service import list_games
@@ -30,9 +30,23 @@ def health_check():
 
 
 @app.get("/api/games")
-def get_games():
+def get_games(
+    query: str | None = Query(default=None, max_length=100),
+    genre: str | None = Query(default=None, max_length=50),
+    platform: str | None = Query(default=None, max_length=50),
+):
     try:
-        result = list_games()
+        filters = {
+            key: value.strip()
+            for key, value in {
+                "query": query,
+                "genre": genre,
+                "platform": platform,
+            }.items()
+            if value and value.strip()
+        }
+
+        result = list_games(filters)
         games = result.get("games", [])
 
         return {

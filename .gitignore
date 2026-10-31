@@ -1,5 +1,8 @@
 # Environment variables and secrets
 .env
+.env.*
+!.env.example
+!**/.env.example
 
 # Python virtual environment
 .venv/
@@ -10,11 +13,23 @@ __pycache__/
 
 # Next.js dependencies and build output
 node_modules/
+web/node_modules/
 .next/
+web/.next/
 out/
+web/out/
+web/coverage/
+web/tsconfig.tsbuildinfo
 
 # Local environment files
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Local/editor artefacts
+.DS_Store
+.vscode/
+.idea/
+*.log
+npm-debug.log*
