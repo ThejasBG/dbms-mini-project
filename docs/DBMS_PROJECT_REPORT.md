@@ -39,6 +39,23 @@ When a catalogue contains games with varied genres, platforms, and descriptions,
 
 The seeded catalogue contains 53 game records and fictional demonstration reviews. The application stores game metadata and review text, not game binaries or payments. The existing Streamlit interface remains as a learning prototype/fallback; the Next.js application is the primary web interface. Email verification, password recovery, rate limiting, review moderation, production deployment hardening, monitoring, and backup automation are not implemented.
 
+### Functional requirements
+
+| ID | Requirement | Role |
+|---|---|---|
+| FR1 | Browse the catalogue with pagination, text search (title/description), and filters for genre, platform, pricing model, and minimum rating. | Visitor, player, admin |
+| FR2 | Sort the catalogue by title, newest, rating, or popularity. | Visitor, player, admin |
+| FR3 | View a game's details, genuine average rating, and reviews; fictional demonstration reviews are labelled. | Visitor, player, admin |
+| FR4 | Register and sign in with email and password; sign out. Passwords are stored only as salted hashes. | Visitor |
+| FR5 | Submit or update one review (rating 1–5, 5–1000 characters) per game. | Player, admin |
+| FR6 | Maintain a personal wishlist and library: add, view, and remove games. | Player, admin |
+| FR7 | Request recommendations similar to a chosen game or to a free-text description of the user's tastes (pgvector similarity search). | Visitor, player, admin |
+| FR8 | View database-derived analytics: totals, genre and platform distribution, top-rated and most-reviewed games. | Visitor, player, admin |
+| FR9 | Create, edit, and delete catalogue games; embeddings are regenerated on create/edit. | Admin only |
+| FR10 | Reject invalid input at the API and database levels (constraints, unique keys, foreign keys) and return clear errors. | All |
+
+Non-functional requirements: database and session configuration come from environment variables, the browser never connects to PostgreSQL directly, and setup/test steps are reproducible from the README.
+
 ## 5. Technology stack
 
 | Layer | Technology | Use |
@@ -48,7 +65,7 @@ The seeded catalogue contains 53 game records and fictional demonstration review
 | Relational database | PostgreSQL | Catalogue, users, reviews, collections, constraints, views, and SQL analytics |
 | Vector capability | pgvector | 384-dimensional game embeddings and cosine-similarity search within PostgreSQL |
 | Embeddings | Sentence Transformers `sentence-transformers/all-MiniLM-L6-v2` | Encodes game metadata and free-text recommendation queries; deterministic hashed-token fallback exists if the model cannot load |
-| Configuration | `.env` and `web/.env.local` (local-only) | Database URL, session secret, and frontend API URL configuration; examples are provided in the repository |
+| Configuration | `.env` and `web/.env.local` (local-only) | `DATABASE_URL`, `SESSION_SECRET`, and frontend API URL configuration. The backend refuses to start if `DATABASE_URL` or `SESSION_SECRET` is unset, so no credential is embedded in source; placeholder examples are in `.env.example` |
 | Legacy prototype | Streamlit, optional Redis cache | Preserved learning prototype; PostgreSQL remains the source of truth |
 
 ## 6. Database choices and justification
@@ -189,7 +206,7 @@ psql -U postgres -d game_catalog -v ON_ERROR_STOP=1 -f sql/migrations/001_applic
 
 ### DDL and DML examples
 
-The schema uses `CREATE TABLE`, primary/foreign keys, CHECK/UNIQUE constraints, and indexes. The application migration uses `ALTER TABLE` and creates a view/indexes. Example DDL from the schema:
+The schema uses `CREATE TABLE`, primary/foreign keys, CHECK/UNIQUE constraints, and indexes. The application migration uses `ALTER TABLE`, creates indexes, and uses `DROP VIEW IF EXISTS` followed by `CREATE VIEW` so the view definition can be re-applied safely. `sql/queries.sql` (section 14) demonstrates the full `CREATE` / `ALTER` / `DROP` lifecycle on a session-only temporary table so no project table is dropped. Example DDL from the schema:
 
 ```sql
 CREATE TABLE IF NOT EXISTS wishlist (
@@ -334,7 +351,10 @@ Testing was performed on 31 October 2026. The original `game_catalog` database w
 | Live catalogue | PASS — 53 games; Action filter 7 matches; search “Hades” 1 match; title-descending sort and page-2 pagination worked |
 | Game details/reviews | PASS — details and seed-review labeling displayed; disposable signed-in account submitted and updated a review, then test data was removed |
 | Wishlist/library | PASS — disposable account added, viewed, and removed an entry from each; account and test data were removed afterward |
-| Authentication and role UI | PASS for registration, login/logout, and player denial at `/admin`; admin create/update/delete operations were not manually exercised as an admin |
+| Authentication and role UI | PASS for registration, login/logout, and player denial at `/admin` |
+| Admin catalogue workflow (API) | PASS — with a disposable account promoted to `admin`: player create denied (403); admin create (201), update (200, change persisted), duplicate title rejected (409), invalid cover URL rejected (422), delete (200), repeat delete (404). The disposable account and game were removed; the catalogue still had 53 games |
+| DDL lifecycle and view re-creation | PASS — migration re-applied (`DROP VIEW IF EXISTS` + `CREATE VIEW`; view returned 53 rows); `CREATE`/`ALTER`/`DROP` demo on a temporary table ran and the table was gone afterwards |
+| Required configuration | PASS — backend raises a clear error when `SESSION_SECRET` or `DATABASE_URL` is unset; auth unit tests pass once configured |
 | Analytics and pgvector | PASS — database summaries loaded and a natural-language query returned similarity-ranked results |
 
 The temporary test account, review, wishlist, and library data were removed. A post-cleanup check found no matching test account or review. The separate setup-test database was dropped; `game_catalog` remained intact with 53 games and embeddings.
@@ -347,14 +367,16 @@ The temporary test account, review, wishlist, and library data were removed. A p
 | Two-member team and defined contributions | Documented | Two students and commit-based responsibilities are listed in Section 2; team confirmed the split. |
 | PostgreSQL plus a second database paradigm | Complete | PostgreSQL relational data plus pgvector vector search; no separate NoSQL product is used. |
 | ER diagram and relational schema | Complete | `docs/ER_DIAGRAM.md`, `sql/schema.sql`, and application migration. |
-| DDL, DML, keys, constraints, indexes, views | Implemented | Schema and migration demonstrate these; a disposable test database was dropped as cleanup, not project data. |
+| DDL (`CREATE`, `ALTER`, `DROP`), keys, constraints, indexes, views | Implemented and tested | Schema and migration use `CREATE`/`ALTER`/`DROP VIEW`; `sql/queries.sql` section 14 demonstrates `CREATE`/`ALTER`/`DROP` on a temporary table. |
 | Meaningful SELECT/INSERT/UPDATE/DELETE and advanced SQL | Implemented and tested | Application APIs and `sql/queries.sql` demonstrate DML, joins, aggregates, subqueries, transactions, and rollback. |
 | At least four advanced database concepts | Complete | Transactions, row locking in the legacy transfer service, indexes (GIN/B-tree/HNSW), a view, constraints, and vector similarity search. |
 | Functional Next.js web application and API integration | Complete | Next.js App Router, FastAPI, PostgreSQL, and environment-based configuration. |
-| Authentication and at least two roles | Implemented; partial role-flow testing | `player` and `admin` roles are enforced in the API; player denial was tested, but an admin write workflow was not. |
+| Authentication and at least two roles | Implemented and tested | `player` and `admin` roles are enforced in the API; player denial and the admin create/update/delete workflow were both tested. |
 | Validation, integrity, and password/session protection | Implemented and partially tested | Pydantic/API validation, PostgreSQL constraints, salted PBKDF2 password hashes, signed HttpOnly cookie, parameterized SQL. Production hardening remains future work. |
 | Fresh database initialization and migration | Tested | Completed in a separate disposable database and cleaned up; existing `game_catalog` was not reset. |
-| Automated and live test results | Recorded | Results are listed in Section 13; admin writes and fresh dependency installation were not tested. |
+| Automated and live test results | Recorded | Results are listed in Section 13; a fresh dependency installation was not repeated. |
+| Functional requirements documented | Included | Section 4 lists FR1–FR10. |
+| No hard-coded credentials | Implemented | `DATABASE_URL` and `SESSION_SECRET` must come from the environment/`.env`; the backend refuses to start without them. |
 | Application code sample/demo screenshots | Included | Section 12 provides a source-code excerpt with implementation links and four genuine application screenshots. |
 | README setup instructions | Tested in part | Database setup/migration and temporary API health were tested; a clean install of all Python/Node dependencies was not repeated. |
 | Team formation / instructor approval | Confirmation required | Two team members are identified; instructor approval is not independently evidenced in the repository. |
