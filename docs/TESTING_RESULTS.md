@@ -35,10 +35,20 @@ temporary transactional test records and verifies rollback.
   API instance returned `database: connected`. The disposable database was
   dropped afterward; `game_catalog` remained intact with 53 games.
 
+- Admin API workflow, using a disposable account promoted to `admin`: player
+  create denied (403); admin create (201), update (200), duplicate title (409),
+  invalid cover URL (422), delete (200), repeat delete (404). The disposable
+  account and game were removed; the catalogue still had 53 games.
+- The migration was re-applied (`DROP VIEW IF EXISTS` + `CREATE VIEW`) and the
+  view returned 53 rows. The `CREATE`/`ALTER`/`DROP` demo in `sql/queries.sql`
+  (section 14) ran on a temporary table.
+- The backend now raises a clear error if `DATABASE_URL` or `SESSION_SECRET`
+  is unset; `backend.test_http_api` (3 tests) passes with them configured.
+
 ## Not verified in this pass
 
-- Admin catalogue create/update/delete operations were not manually exercised
-  as an administrator.
+- Admin catalogue actions were tested through the API only, not through the
+  browser admin page.
 - Python/Node dependencies were already installed, so a clean dependency
   installation and a fresh frontend-server restart were not repeated.
 - Instructor confirmation of the Next.js requirement and the project's

@@ -28,7 +28,9 @@ app = FastAPI(
 )
 
 APP_ENV = os.getenv("APP_ENV", "development").lower()
-SESSION_SECRET = os.getenv("SESSION_SECRET", "dev-only-change-me")
+SESSION_SECRET = os.getenv("SESSION_SECRET", "").strip()
+if not SESSION_SECRET:
+    raise RuntimeError("SESSION_SECRET is not set. Copy .env.example to .env and set a random value.")
 SESSION_COOKIE = "steamish_session"
 SESSION_TTL_SECONDS = 7 * 24 * 60 * 60
 COOKIE_SECURE = APP_ENV == "production"

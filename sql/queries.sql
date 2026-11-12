@@ -77,3 +77,15 @@ SELECT id,title FROM games WHERE 'RPG'=ANY(genres) ORDER BY title;
 BEGIN;
 DELETE FROM users WHERE username='SQLDemoUser';
 ROLLBACK;
+
+-- 14) DDL lifecycle demonstration on a temporary table (CREATE, ALTER, DROP).
+-- TEMP tables exist only for this session; no project table is affected.
+CREATE TEMP TABLE ddl_demo (
+  id BIGSERIAL PRIMARY KEY,
+  game_id BIGINT NOT NULL CHECK (game_id > 0),
+  note TEXT NOT NULL CHECK (char_length(note) BETWEEN 1 AND 100)
+);
+ALTER TABLE ddl_demo ADD COLUMN created_at TIMESTAMPTZ NOT NULL DEFAULT now();
+CREATE INDEX ddl_demo_game_idx ON ddl_demo(game_id);
+DROP INDEX ddl_demo_game_idx;
+DROP TABLE ddl_demo;

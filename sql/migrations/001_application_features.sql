@@ -43,7 +43,9 @@ ALTER TABLE reviews
 CREATE UNIQUE INDEX IF NOT EXISTS reviews_user_game_uq
     ON reviews (user_id, game_id) WHERE user_id IS NOT NULL;
 
-CREATE OR REPLACE VIEW game_review_summary AS
+-- DROP the view first so the migration can be re-run safely after definition changes.
+DROP VIEW IF EXISTS game_review_summary;
+CREATE VIEW game_review_summary AS
 SELECT
     g.id AS game_id,
     g.title,
